@@ -8,10 +8,14 @@ This repository contains the Example Code for the CeroUno's Python Apprenticeshi
             Authors:
         </dt>
         <dd>
-            Ricardo Tercero
+            <a href="https://github.com/R3SWebDevelopment" target="_blank">
+                Ricardo Tercero
+            </a>
         </dd>
         <dd>
-            Edder Leonardo
+            <a href="https://github.com/edderleonardo" target="_blank">
+                Edder Leonardo
+            </a>
         </dd>
     </dl>
 </p>

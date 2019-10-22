@@ -5,8 +5,25 @@ This repository contains the Example Code for the CeroUno's Python Apprenticeshi
 ## Programa
 1. Fundamentos de Programación I (*__Programación en Python__*)
     1. Estructura de Datos
+        1. String
+        1. Integer
+        1. Float
+        1. Boolean
+        1. Tuple
+        1. Set
+        1. List
+        1. Dictionary
     1. Variables
+        1. Globales
+        1. Locales
+        1. Constantes
+        1. Variables
+        1. Internas
+        1. Privadas
     1. Operadores
+        1. Aritmeticos
+        1. Logicos
+        1. Binarios
     1. Control Flow
     1. Ciclos
     1. Lectura y Escritura

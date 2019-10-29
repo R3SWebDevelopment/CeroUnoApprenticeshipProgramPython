@@ -5,7 +5,7 @@ This repository contains the Example Code for the CeroUno's Python Apprenticeshi
 ## Programa
 1. Fundamentos de Programación I (*__Programación en Python__*)
     1. Estructura de Datos
-        1. String
+        1. [String](https://github.com/R3SWebDevelopment/CeroUnoApprenticeshipProgramPython/blob/master/cadenas.md)
         1. Integer
         1. Float
         1. Boolean

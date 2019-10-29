@@ -1,0 +1,1 @@
+# Tipo de datos **Cadenas**

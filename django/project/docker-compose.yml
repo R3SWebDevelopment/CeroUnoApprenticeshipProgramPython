@@ -2,21 +2,31 @@ version: '3'
 
 services:
   db:
-    restart: always
     image: postgres:latest
     environment:
-       POSTGRES_PASSWORD: Passw0rd
+      DB_USER: my_web_db_user
+      DB_PASS: Passw0rd
+      B_NAME: my_web_db
     ports:
       - "5432:5432"
     volumes:
       - ./postgres-data:/var/lib/postgresql/data
   web:
-    restart: always
     build: .
-    command: python manage.py runserver 0.0.0.0:8000
+    command: python my_web/manage.py runserver 0.0.0.0:8000
     volumes:
       - .:/code
     ports:
       - "8000:8000"
+    depends_on:
+      - migration
+  migration:
+    build: .
+    image: app
+    command: python my_web/manage.py migrate --noinput
+    volumes:
+      - .:/code
+    links:
+      - db
     depends_on:
       - db

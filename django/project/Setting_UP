@@ -35,3 +35,6 @@ project_web                                      latest              409c6e8a25a
 1. Run MIGRATIONS container to create db `>docker-compose up migration`
 1. Run Web container to check if settings and db are working: `>docker-compose up web`
 1. Create a Super User for Admin: `>docker-compose run web python my_web/manage.py createsuperuser`
+
+**Helpfull Commands**
+1. Create migrations for a specific app: `>docker-compose run migration python my_web/manage.py makemigrations <APP_NAME>`

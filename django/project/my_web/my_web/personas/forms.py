@@ -13,7 +13,7 @@ class PersonaForm(forms.ModelForm):
     class Meta:
         models = Persona
         # Definimos los campos que se van a mostrar en la forma
-        fields = ['nombre', 'apellido_paterno', 'genero']
+        fields = ['nombre', 'apellido_paterno', 'genero', 'fecha_nacimiento']
 
     def __init__(self, *args, **kwargs):
         # Es necesario inicializar la clase padre ModelForm

@@ -113,19 +113,21 @@ class PersonaAdmin(admin.ModelAdmin):
 admin.site.register(Persona, PersonaAdmin)
 
 
-def enroll_persona_membresia(modeladmin, request, queryset):
+def sign_up_member(modeladmin, request, queryset):
     for persona in queryset:
         if not persona.is_member:
             Miembro.enroll_persona(persona=persona)
 
 
-enroll_persona_membresia.short_description = "Inscribir Miembro"
+sign_up_member.short_description = "Dar Acceso al Portal"
+
 
 class MiembroAdmin(PersonaAdmin):
     # La clase MiembroAdmin heredad de la clase PersonaAdmin, ya que sus funciones son similares, con esto se logra
     # reducir el numero de lineas de codigo y de metodos a implementar,
     list_display = PersonaAdmin.list_display
     list_filter = PersonaAdmin.list_filter
+    actions = [sign_up_member]
 
 
 admin.site.register(Miembro, MiembroAdmin)

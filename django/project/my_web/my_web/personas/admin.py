@@ -47,6 +47,11 @@ class ParejaTabularAdmin(PersonaTabularAdmin):
 
 
 def enroll_persona_membresia(modeladmin, request, queryset):
+    # Esta funcion es la que sera agregada al listado de acciones de PersonaAdmin
+    # el parametro modeladmin hace referencia a un objeto de la clase PersonaAdmin
+    # el parametro request hace referencia a la petición web invocada al hacer click al boton Go
+    # el parametro queryset hace referencia al listado de objetos seleccionados en la lista de personas, al momento de
+    # invocar la accion "Incribir Miembro"
     for persona in queryset:
         if not persona.is_member:
             Miembro.enroll_persona(persona=persona)
@@ -107,6 +112,14 @@ class PersonaAdmin(admin.ModelAdmin):
 
 admin.site.register(Persona, PersonaAdmin)
 
+
+def enroll_persona_membresia(modeladmin, request, queryset):
+    for persona in queryset:
+        if not persona.is_member:
+            Miembro.enroll_persona(persona=persona)
+
+
+enroll_persona_membresia.short_description = "Inscribir Miembro"
 
 class MiembroAdmin(PersonaAdmin):
     # La clase MiembroAdmin heredad de la clase PersonaAdmin, ya que sus funciones son similares, con esto se logra

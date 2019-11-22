@@ -57,7 +57,14 @@ enroll_persona_membresia.short_description = "Inscribir Miembro"
 
 class PersonaAdmin(admin.ModelAdmin):
     list_display = [  # Aqui definimos los campos que se muestran en el listado de personas
-        'nombre', 'apellido_paterno', 'genero', 'tiene_pareja', 'tiene_padre', 'tiene_madre', 'tiene_hermanos',
+        'nombre',  # Esta campo viene del modelo Persona
+        'apellido_paterno',  # Esta campo viene del modelo Persona
+        'genero', 'tiene_pareja',   # Esta campo viene del modelo Persona
+        # Los siguientes campos no se encuentran dentro del modelo Persona, entonces la clase PersonaAdmin los va a
+        # buscar dentro de las propiedades y funciones contenidas en su propia clase
+        'tiene_padre',
+        'tiene_madre',
+        'tiene_hermanos',
         'es_miembro',
     ]
     search_fields = [  # Aqui definimos los campos que se utilizan para hacer busquedas
@@ -68,14 +75,20 @@ class PersonaAdmin(admin.ModelAdmin):
     ]
     form = MiembroForm
 
+    # En el atributo inlines, se definen todas aquellas clases que se utilizan para desplegar o capturar datos de manera
+    # mas compleja, como aquellos datos que se encuentran en algun tipo de relación con la clase persona
     inlines = [
         PadreTabularAdmin,
         MadreTabularAdmin,
         ParejaTabularAdmin,
         HermanoTabularAdmin,
     ]
+    # El atributo se definen todas aquellas funciones adicionales o hechas a la medida que afectaran a los registros
+    # desplegados en el listado de personas
     actions = [enroll_persona_membresia]
 
+    # Las siguientes funciones definidas, son las que utilizara la clase PersonaAdmin para deplegar información
+    # calculada al vuelo en la lista de personas
     def tiene_pareja(self, obj):
         return obj.tiene_pareja
 
@@ -96,6 +109,8 @@ admin.site.register(Persona, PersonaAdmin)
 
 
 class MiembroAdmin(PersonaAdmin):
+    # La clase MiembroAdmin heredad de la clase PersonaAdmin, ya que sus funciones son similares, con esto se logra
+    # reducir el numero de lineas de codigo y de metodos a implementar,
     list_display = PersonaAdmin.list_display
     list_filter = PersonaAdmin.list_filter
 

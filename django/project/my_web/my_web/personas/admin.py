@@ -78,7 +78,7 @@ class PersonaAdmin(admin.ModelAdmin):
     list_filter = [  # Aqui definimos los campos que se utilizan para hacer filtros
         'apellido_paterno', 'genero',
     ]
-    form = MiembroForm
+    form = PersonaForm
 
     # En el atributo inlines, se definen todas aquellas clases que se utilizan para desplegar o capturar datos de manera
     # mas compleja, como aquellos datos que se encuentran en algun tipo de relación con la clase persona
@@ -114,9 +114,7 @@ admin.site.register(Persona, PersonaAdmin)
 
 
 def sign_up_member(modeladmin, request, queryset):
-    for persona in queryset:
-        if not persona.is_member:
-            Miembro.enroll_persona(persona=persona)
+    pass
 
 
 sign_up_member.short_description = "Dar Acceso al Portal"
@@ -128,6 +126,7 @@ class MiembroAdmin(PersonaAdmin):
     list_display = PersonaAdmin.list_display
     list_filter = PersonaAdmin.list_filter
     actions = [sign_up_member]
+    form = MiembroForm
 
 
 admin.site.register(Miembro, MiembroAdmin)

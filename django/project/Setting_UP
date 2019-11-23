@@ -38,3 +38,4 @@ project_web                                      latest              409c6e8a25a
 
 **Helpfull Commands**
 1. Create migrations for a specific app: `>docker-compose run migration python my_web/manage.py makemigrations <APP_NAME>`
+1. Open Django Shell: `>docker-compose run migration python my_web/manage.py shell`

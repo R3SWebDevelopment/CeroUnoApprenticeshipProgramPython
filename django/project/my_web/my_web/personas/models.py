@@ -1,6 +1,8 @@
+import random
+
 from django.db import models
 
-import random
+from my_web.GeoInfo.models import Ciudad
 
 GENERO_CHOICES = [
     ('M', 'MASCULINO'),
@@ -20,6 +22,8 @@ class Persona(models.Model):
     hermanos = models.ManyToManyField('Persona', related_name='mis_hermanos', through='Hermandad')
     pareja = models.OneToOneField('Persona', null=True, blank=False,
                                   on_delete=models.CASCADE, related_name='mi_pareja')
+    ciudad_nacimiento = models.ForeignKey(Ciudad, null=True, blank=False, default=None,
+                                          related_name='ciudades_nacimeinto', on_delete=models.CASCADE)
 
     def __str__(self):
         return "{} {}".format(self.nombre, self.apellido_paterno)
@@ -69,12 +73,27 @@ class Miembro(Persona):
         nombre_completo = super(Miembro, self).__str__()
         return "{} - {}".format(nombre_completo, self.numero_membresia)
 
+    @classmethod
+    def next_membresia(cls):
+        # Funcion que calcula la siguiente membresia en base a la ultima membresia asignada
+        if cls.objects.all().count() == 0:
+            return "00001"
+        else:
+            membresias = cls.objects.all().order_by('-numero_membresia').values_list('numero_membresia', flat=True)
+            ultima_membresia_string = membresias[0]
+            ultima_membresia = int(ultima_membresia_string)
+            ultima_membresia += 1
+            ultima_membresia_string = str(ultima_membresia)
+            siguiente_membresia_string = "{}{}".format(
+                "0" * (5 - len(ultima_membresia_string)),
+                ultima_membresia_string
+            )
+            return siguiente_membresia_string
+
     def save(self, *args, **kwargs):
         numero_membresia = getattr(self, 'numero_membresia', None)
         if numero_membresia is None or len(numero_membresia.strip()) == 0:
-            numbers = [n for n in range(0, 10)]
-            numero_membresia = ''.join([str(random.choice(numbers)) for _ in range(0, 10)])
-            self.numero_membresia = numero_membresia
+            self.numero_membresia = self.__class__.next_membresia()
         super(Miembro, self).save(*args, **kwargs)
 
     @classmethod

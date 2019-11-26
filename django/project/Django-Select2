@@ -1,0 +1,5 @@
+1. Agregar "django_select2" al archivo requirements.txt
+2. Agregar "django_select2" al archivo settings.py dentro de la carpeta my_web
+3. Agregar "path(r'select2/', include('django_select2.urls'))," al archivo urls.py dentro de la carpeta my_web
+4. Crear carpeta "templates" dentro de la carpeta my_web
+5. Configure statis on settings.py

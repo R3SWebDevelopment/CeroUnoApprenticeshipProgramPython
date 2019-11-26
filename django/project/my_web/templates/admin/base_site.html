@@ -1,0 +1,18 @@
+{% extends "admin/base_site.html" %}
+
+
+{% block title %}
+
+Ricardo Tercero Solis
+
+{% endblock %}
+
+{% block extrahead %}
+    {{ form.media.css }}
+{% endblock %}
+
+{% block footer %}
+    {{ block.super }}
+
+    {{ form.media.js }}
+{% endblock %}

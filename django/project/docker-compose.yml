@@ -24,7 +24,7 @@ services:
   migration:
     build: .
     image: app
-    command: bash -c "python my_web/manage.py makemigrations --noinput && python my_web/manage.py migrate --noinput"
+    command: bash -c "python my_web/manage.py makemigrations --noinput && python my_web/manage.py migrate --noinput && python my_web/manage.py collectstatic --no-input"
     volumes:
       - .:/code
     links:

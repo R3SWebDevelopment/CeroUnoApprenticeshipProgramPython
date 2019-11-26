@@ -52,6 +52,10 @@ class Persona(models.Model):
     def is_member(self):
         return Miembro.objects.filter(persona_ptr=self).first() is not None
 
+    @property
+    def pais(self):
+        return None
+
 
 class Hermandad(models.Model):
     persona_uno = models.ForeignKey(Persona, related_name='rel_from_set', on_delete=models.CASCADE)

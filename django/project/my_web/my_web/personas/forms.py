@@ -1,4 +1,5 @@
 from django import forms
+from django_select2.forms import ModelSelect2Widget
 
 from .models import (
     Persona,
@@ -6,14 +7,22 @@ from .models import (
     GENERO_CHOICES,
     Miembro,
 )
+from my_web.GeoInfo.models import Pais
 
 
 class PersonaForm(forms.ModelForm):
 
+    pais = forms.ChoiceField(
+        widget=ModelSelect2Widget(
+            model=Pais,
+            search_fields=['nombre__icontains']
+        )
+    )
+
     class Meta:
         models = Persona
         # Definimos los campos que se van a mostrar en la forma
-        fields = ['nombre', 'apellido_paterno', 'genero', 'fecha_nacimiento']
+        fields = ['nombre', 'apellido_paterno', 'genero', 'fecha_nacimiento', 'pais']
 
     def __init__(self, *args, **kwargs):
         # Es necesario inicializar la clase padre ModelForm

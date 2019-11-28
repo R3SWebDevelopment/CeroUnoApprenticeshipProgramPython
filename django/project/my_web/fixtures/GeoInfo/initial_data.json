@@ -1,0 +1,287 @@
+[
+  {
+    "model": "GeoInfo.pais",
+    "pk": 1,
+    "fields": {
+      "nombre": "Mexico"
+    }
+  },
+  {
+    "model": "GeoInfo.pais",
+    "pk": 2,
+    "fields": {
+      "nombre": "Estados Unidos"
+    }
+  },
+  {
+    "model": "GeoInfo.pais",
+    "pk": 3,
+    "fields": {
+      "nombre": "Canada"
+    }
+  },
+  {
+    "model": "GeoInfo.estado",
+    "pk": 1,
+    "fields": {
+      "nombre": "Aguascalientes",
+      "pais": 1
+    }
+  },
+  {
+    "model": "GeoInfo.estado",
+    "pk": 2,
+    "fields": {
+      "nombre": "Baja California",
+      "pais": 1
+    }
+  },
+  {
+    "model": "GeoInfo.estado",
+    "pk": 3,
+    "fields": {
+      "nombre": "Baja California Sur",
+      "pais": 1
+    }
+  },
+  {
+    "model": "GeoInfo.estado",
+    "pk": 4,
+    "fields": {
+      "nombre": "Campeche",
+      "pais": 1
+    }
+  },
+  {
+    "model": "GeoInfo.estado",
+    "pk": 5,
+    "fields": {
+      "nombre": "Chiapas",
+      "pais": 1
+    }
+  },
+  {
+    "model": "GeoInfo.estado",
+    "pk": 6,
+    "fields": {
+      "nombre": "Chihuahua",
+      "pais": 1
+    }
+  },
+  {
+    "model": "GeoInfo.estado",
+    "pk": 7,
+    "fields": {
+      "nombre": "Ciudad de M\u00e9xico",
+      "pais": 1
+    }
+  },
+  {
+    "model": "GeoInfo.estado",
+    "pk": 8,
+    "fields": {
+      "nombre": "Coahuila",
+      "pais": 1
+    }
+  },
+  {
+    "model": "GeoInfo.estado",
+    "pk": 9,
+    "fields": {
+      "nombre": "Colima",
+      "pais": 1
+    }
+  },
+  {
+    "model": "GeoInfo.estado",
+    "pk": 10,
+    "fields": {
+      "nombre": "Durango",
+      "pais": 1
+    }
+  },
+  {
+    "model": "GeoInfo.estado",
+    "pk": 11,
+    "fields": {
+      "nombre": "Guanajuato",
+      "pais": 1
+    }
+  },
+  {
+    "model": "GeoInfo.estado",
+    "pk": 12,
+    "fields": {
+      "nombre": "Guerrero",
+      "pais": 1
+    }
+  },
+  {
+    "model": "GeoInfo.estado",
+    "pk": 13,
+    "fields": {
+      "nombre": "Hidalgo",
+      "pais": 1
+    }
+  },
+  {
+    "model": "GeoInfo.estado",
+    "pk": 14,
+    "fields": {
+      "nombre": "Jalisco",
+      "pais": 1
+    }
+  },
+  {
+    "model": "GeoInfo.estado",
+    "pk": 15,
+    "fields": {
+      "nombre": "M\u00e9xico",
+      "pais": 1
+    }
+  },
+  {
+    "model": "GeoInfo.estado",
+    "pk": 16,
+    "fields": {
+      "nombre": "Michoac\u00e1n",
+      "pais": 1
+    }
+  },
+  {
+    "model": "GeoInfo.estado",
+    "pk": 17,
+    "fields": {
+      "nombre": "Morelos",
+      "pais": 1
+    }
+  },
+  {
+    "model": "GeoInfo.estado",
+    "pk": 18,
+    "fields": {
+      "nombre": "Nayarit",
+      "pais": 1
+    }
+  },
+  {
+    "model": "GeoInfo.estado",
+    "pk": 19,
+    "fields": {
+      "nombre": "Nuevo Le\u00f3n",
+      "pais": 1
+    }
+  },
+  {
+    "model": "GeoInfo.estado",
+    "pk": 20,
+    "fields": {
+      "nombre": "Oaxaca",
+      "pais": 1
+    }
+  },
+  {
+    "model": "GeoInfo.estado",
+    "pk": 21,
+    "fields": {
+      "nombre": "Puebla",
+      "pais": 1
+    }
+  },
+  {
+    "model": "GeoInfo.estado",
+    "pk": 22,
+    "fields": {
+      "nombre": "Quer\u00e9taro",
+      "pais": 1
+    }
+  },
+  {
+    "model": "GeoInfo.estado",
+    "pk": 23,
+    "fields": {
+      "nombre": "Quintana Roo",
+      "pais": 1
+    }
+  },
+  {
+    "model": "GeoInfo.estado",
+    "pk": 24,
+    "fields": {
+      "nombre": "San Luis Potos\u00ed",
+      "pais": 1
+    }
+  },
+  {
+    "model": "GeoInfo.estado",
+    "pk": 25,
+    "fields": {
+      "nombre": "Sinaloa",
+      "pais": 1
+    }
+  },
+  {
+    "model": "GeoInfo.estado",
+    "pk": 26,
+    "fields": {
+      "nombre": "Sonora",
+      "pais": 1
+    }
+  },
+  {
+    "model": "GeoInfo.estado",
+    "pk": 27,
+    "fields": {
+      "nombre": "Tabasco",
+      "pais": 1
+    }
+  },
+  {
+    "model": "GeoInfo.estado",
+    "pk": 28,
+    "fields": {
+      "nombre": "Tamaulipas",
+      "pais": 1
+    }
+  },
+  {
+    "model": "GeoInfo.estado",
+    "pk": 29,
+    "fields": {
+      "nombre": "Tlaxcala",
+      "pais": 1
+    }
+  },
+  {
+    "model": "GeoInfo.estado",
+    "pk": 30,
+    "fields": {
+      "nombre": "Veracruz",
+      "pais": 1
+    }
+  },
+  {
+    "model": "GeoInfo.estado",
+    "pk": 31,
+    "fields": {
+      "nombre": "Yucat\u00e1n",
+      "pais": 1
+    }
+  },
+  {
+    "model": "GeoInfo.estado",
+    "pk": 32,
+    "fields": {
+      "nombre": "Zacatecas",
+      "pais": 1
+    }
+  },
+  {
+    "model": "GeoInfo.estado",
+    "pk": 33,
+    "fields": {
+      "nombre": "Maine",
+      "pais": 2
+    }
+  }
+]

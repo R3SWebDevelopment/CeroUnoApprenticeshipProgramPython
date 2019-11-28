@@ -56,6 +56,17 @@ class Persona(models.Model):
     def pais(self):
         return None
 
+    @property
+    def nombre_completo(self):
+        return "{} {}".format(
+            self.nombre,
+            self.apellido_paterno
+        )
+
+    @property
+    def genero_label(self):
+        return "Masculino" if self.genero == 'M' else "Femenino"
+
 
 class Hermandad(models.Model):
     persona_uno = models.ForeignKey(Persona, related_name='rel_from_set', on_delete=models.CASCADE)

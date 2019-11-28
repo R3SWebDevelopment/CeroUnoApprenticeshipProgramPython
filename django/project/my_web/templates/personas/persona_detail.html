@@ -1,0 +1,42 @@
+{% extends "detail.html" %}
+
+{% block title %}
+    Detalle de Personas
+{% endblock %}
+
+{% block app_content %}
+    {{ block.super }}
+{% endblock %}
+
+{% block bootstrap4_extra_script %}
+    {{ block.super }}
+    <script>
+        $(document).ready(function(){
+
+            var change_pais = function(e){
+                var select_option = $(e.currentTarget).select2('data');
+                var pais_id = $(select_option).attr('id');
+                $(estado).select2({
+                    placeholder: "Escoge Estado",
+                    ajax: {
+                        url: '{{estado_url}}?pais=' + pais_id
+                    }
+                })
+            }
+
+
+            var pais = $(this).find('select#id_pais');
+            $(pais).select2({
+                placeholder: "Escoge Pais",
+                ajax: {
+                    url: '{{pais_url}}'
+                }
+
+            }).on('select2:select', change_pais)
+            var estado = $(this).find('select#id_estado');
+            $(estado).select2({
+                placeholder: "Escoge Estado",
+            })
+        })
+    </script>
+{% endblock %}

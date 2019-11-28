@@ -31,10 +31,9 @@ ALLOWED_HOSTS = ['*']
 # Application definition
 
 INSTALLED_APPS = [
-    'django_select2',
+    'bootstrap4',
     'my_web.personas',
     'my_web.GeoInfo',
-
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -130,3 +129,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
+BOOTSTRAP4 = {
+    'include_jquery': True,
+}

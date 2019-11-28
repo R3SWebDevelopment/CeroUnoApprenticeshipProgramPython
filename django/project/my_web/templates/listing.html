@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block title %}
+    Listado de Registros
+{% endblock %}
+
+
+
+{% block app_content %}
+    {{ block.super }}
+
+    <table class="table table-hover table-striped">
+        <thead class="thead-dark">
+            <tr>
+                {% for columna in lista.columnas %}
+                    <th>{{ columna }}</th>
+                {% endfor %}
+            </tr>
+        </thead>
+        {% for line in lista.lista %}
+            <tr>
+                {% for column, label in line.items %}
+                    {% if column == 'link' %}
+                        <td>
+                            <a href="{{ label.url }}">
+                                {{ label.label }}
+                            </a>
+                        </td>
+                    {% else %}
+                        <td>{{ label }}</td>
+                    {% endif %}
+                {% endfor %}
+            </tr>
+        {% endfor %}
+    </table>
+
+{% endblock %}

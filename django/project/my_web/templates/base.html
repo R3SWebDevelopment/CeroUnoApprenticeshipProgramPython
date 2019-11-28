@@ -1,0 +1,23 @@
+{% extends 'bootstrap.html' %}
+
+{% load bootstrap4 %}
+
+{% block bootstrap4_extra_head %}
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.0.12/dist/css/select2.min.css" rel="stylesheet" />
+{% endblock %}
+
+{% block bootstrap4_content %}
+    <div class="container">
+        <h1>{% block title %}(no title){% endblock %}</h1>
+
+        {% block app_content %}{% endblock %}
+
+        {% autoescape off %}{% bootstrap_messages %}{% endautoescape %}
+
+    </div>
+
+{% endblock %}
+
+{% block bootstrap4_extra_script %}
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.0.12/dist/js/select2.min.js"></script>
+{% endblock %}

@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% load bootstrap4 %}
+
+{% block title %}
+    Detalle de Registros
+{% endblock %}
+
+
+
+{% block app_content %}
+    {{ block.super }}
+
+    <form>
+        {% csrf_token %}
+        {% bootstrap_form form %}
+        {% bootstrap_button "Guardar" button_type="submit" button_class="btn-primary" %}
+        {% bootstrap_button "Cancelar" button_type="reset" button_class="btn-danger" %}
+    </form>
+
+{% endblock %}

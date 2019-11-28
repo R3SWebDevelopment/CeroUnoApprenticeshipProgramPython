@@ -1,5 +1,5 @@
 from django import forms
-from django_select2.forms import ModelSelect2Widget
+from django.urls import reverse
 
 from .models import (
     Persona,
@@ -12,17 +12,14 @@ from my_web.GeoInfo.models import Pais
 
 class PersonaForm(forms.ModelForm):
 
-    pais = forms.ChoiceField(
-        widget=ModelSelect2Widget(
-            model=Pais,
-            search_fields=['nombre__icontains']
-        )
-    )
+    pais = forms.ChoiceField()
+    estado = forms.ChoiceField()
+    ciudad = forms.ChoiceField()
 
     class Meta:
-        models = Persona
+        model = Persona
         # Definimos los campos que se van a mostrar en la forma
-        fields = ['nombre', 'apellido_paterno', 'genero', 'fecha_nacimiento', 'pais']
+        fields = ['nombre', 'apellido_paterno', 'genero', 'fecha_nacimiento', 'pais', 'estado', 'ciudad']
 
     def __init__(self, *args, **kwargs):
         # Es necesario inicializar la clase padre ModelForm
@@ -38,7 +35,7 @@ class PersonaForm(forms.ModelForm):
 class MiembroForm(PersonaForm):
 
     class Meta:
-        models = Miembro
+        model = Miembro
         # Definimos los campos que se van a mostrar en la forma
         fields = PersonaForm.Meta.fields + ['numero_membresia']
 
@@ -57,7 +54,7 @@ class HermandadForm(forms.ModelForm):
     genero = forms.ChoiceField(choices=GENERO_CHOICES, label='Genero')
 
     class Meta:
-        models = Hermandad
+        model = Hermandad
         # Definimos los campos que se van a mostrar en la forma
         fields = ['persona_dos', 'nombre', 'apellido_paterno', 'genero']
 

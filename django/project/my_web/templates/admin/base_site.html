@@ -1,4 +1,5 @@
 {% extends "admin/base_site.html" %}
+{% load staticfiles %}
 
 
 {% block title %}
@@ -8,11 +9,11 @@ Ricardo Tercero Solis
 {% endblock %}
 
 {% block extrahead %}
+    {{ block.super }}
     {{ form.media.css }}
 {% endblock %}
 
 {% block footer %}
     {{ block.super }}
-
     {{ form.media.js }}
 {% endblock %}

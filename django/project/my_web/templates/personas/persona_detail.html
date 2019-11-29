@@ -19,7 +19,18 @@
                 $(estado).select2({
                     placeholder: "Escoge Estado",
                     ajax: {
-                        url: '{{estado_url}}?pais=' + pais_id
+                        url: '{{estado_url}}?pais_id=' + pais_id
+                    }
+                })
+            }
+
+            var estado_pais = function(e){
+                var select_option = $(e.currentTarget).select2('data');
+                var estado_id = $(select_option).attr('id');
+                $(estado).select2({
+                    placeholder: "Escoge Estado",
+                    ajax: {
+                        url: '{{ciudad_url}}?estado=' + estado_id
                     }
                 })
             }
@@ -36,6 +47,11 @@
             var estado = $(this).find('select#id_estado');
             $(estado).select2({
                 placeholder: "Escoge Estado",
+            }).on('select2:select', estado_pais)
+
+            var ciudad = $(this).find('select#id_ciudad');
+            $(ciudad).select2({
+                placeholder: "Escoge Ciudad",
             })
         })
     </script>

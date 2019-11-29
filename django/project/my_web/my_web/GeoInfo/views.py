@@ -3,6 +3,7 @@ from django.http import JsonResponse
 from .models import (
     Pais,
     Estado,
+    Ciudad,
 )
 
 
@@ -36,6 +37,25 @@ def state_listing(request):
             for p in estados
         ],
         'count': estados.count(),
+        'more': False,
+    }
+    return JsonResponse(data)
+
+
+def city_listing(request):
+    ciudades = Ciudad.objects.all()
+    estado_id = request.GET.get('estado_id', None)
+    if estado_id is not None:
+        estados = ciudades.filter(estado__id=estado_id)
+    data = {
+        'results': [
+            {
+                'id': p.id,
+                'text': p.nombre
+            }
+            for p in ciudades
+        ],
+        'count': ciudades.count(),
         'more': False,
     }
     return JsonResponse(data)

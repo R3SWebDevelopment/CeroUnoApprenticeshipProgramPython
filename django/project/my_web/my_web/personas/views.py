@@ -59,7 +59,9 @@ def persona_detail(request, persona_id=None):
             form = PersonaForm(instance=persona)
         context = {
             'form': form,
-            'pais_url': reverse('countries')
+            'pais_url': reverse('countries'),
+            'estado_url': reverse('states'),
+            'ciudad_url': reverse('cities'),
         }
         template = loader.get_template('personas/persona_detail.html')
         return HttpResponse(template.render(context, request))

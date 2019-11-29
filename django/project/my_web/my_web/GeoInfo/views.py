@@ -9,6 +9,9 @@ from .models import (
 
 def country_listing(request):
     paises = Pais.objects.all()
+    q = request.GET.get('q', None)
+    if q is not None:
+        paises = paises.filter(nombre__icontains=q)
     data = {
         'results': [
             {
@@ -28,6 +31,9 @@ def state_listing(request):
     pais_id = request.GET.get('pais_id', None)
     if pais_id is not None:
         estados = estados.filter(pais__id=pais_id)
+    q = request.GET.get('q', None)
+    if q is not None:
+        estados = estados.filter(nombre__icontains=q)
     data = {
         'results': [
             {
@@ -46,7 +52,10 @@ def city_listing(request):
     ciudades = Ciudad.objects.all()
     estado_id = request.GET.get('estado_id', None)
     if estado_id is not None:
-        estados = ciudades.filter(estado__id=estado_id)
+        ciudades = ciudades.filter(estado__id=estado_id)
+    q = request.GET.get('q', None)
+    if q is not None:
+        ciudades = ciudades.filter(nombre__icontains=q)
     data = {
         'results': [
             {

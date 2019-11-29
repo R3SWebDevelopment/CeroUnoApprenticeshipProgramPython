@@ -27,7 +27,7 @@
             var estado_pais = function(e){
                 var select_option = $(e.currentTarget).select2('data');
                 var estado_id = $(select_option).attr('id');
-                $(estado).select2({
+                $(ciudad).select2({
                     placeholder: "Escoge Estado",
                     ajax: {
                         url: '{{ciudad_url}}?estado=' + estado_id

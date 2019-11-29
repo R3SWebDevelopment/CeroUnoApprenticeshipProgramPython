@@ -25,6 +25,6 @@ class Ciudad(models.Model):
 
     def __str__(self):
         return "{} - {}".format(
-            self.pais,
+            self.estado,
             self.nombre
         )

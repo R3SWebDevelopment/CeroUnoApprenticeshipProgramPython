@@ -1,11 +1,28 @@
 {% extends "detail.html" %}
+{% load personas_tags__0 %}
 
 {% block title %}
     Detalle de Personas
 {% endblock %}
 
+{% block bootstrap4_extra_head %}
+    {{ block.super }}
+    <style>
+        #map {
+            height: 500px;  /* The height is 400 pixels */
+            width: 100%;  /* The width is the width of the web page */
+        }
+    </style>
+{% endblock %}
+
 {% block app_content %}
     {{ block.super }}
+
+    {% my_tag "Ricardo Tercero Solis" as tag_string %}
+
+    <h3>My Google Maps Demo {{ tag_string }}</h3>
+    <!--The div element for the map -->
+    <div id="map"></div>
 {% endblock %}
 
 {% block bootstrap4_extra_script %}
@@ -38,7 +55,7 @@
 
             var pais = $(this).find('select#id_pais');
             $(pais).select2({
-                placeholder: "Escoge Pais",
+                placeholder: "",
                 ajax: {
                     url: '{{pais_url}}'
                 }
@@ -54,5 +71,17 @@
                 placeholder: "Escoge Ciudad",
             })
         })
+        function initMap() {
+          // The location of Uluru
+          var uluru = {lat: 125, lng: 125};
+          // The map, centered at Uluru
+          var map = new google.maps.Map(
+              document.getElementById('map'), {zoom: 1, center: uluru});
+          // The marker, positioned at Uluru
+          var marker = new google.maps.Marker({position: uluru, map: map});
+        }
+    </script>
+    <script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA_6ojTztzli7lDv9Hy8L204wHOT3RI_Dk&callback=initMap">
     </script>
 {% endblock %}

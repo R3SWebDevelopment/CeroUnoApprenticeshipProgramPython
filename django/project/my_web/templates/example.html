@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <title>Hello, world!</title>
+</head>
+<body>
+
+<div class="container">
+    <form>
+        <div class="form-group">
+            <label for="exampleInputEmail1">Tamaño de Matriz</label>
+            <input type="number" class="form-control" id="tamagno_matriz" placeholder="Tamaño de Matriz" min="0">
+        </div>
+    </form>
+    <div id="tabla">
+        <div id="component">
+            <input type="number" min="0" id="-1">
+        </div>
+        <table class="table">
+            <tr>
+                <th scope="col">
+                    <input type="number" min="0" id="-1">
+                </th>
+            </tr>
+            <tr>
+                <th scope="col">
+                    <input type="number" min="0" id="-1">
+                </th>
+            </tr>
+            <tr>
+                <th scope="col">
+                    <input type="number" min="0" id="-1">
+                </th>
+            </tr>
+        </table>
+    </div>
+</div>
+
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+
+<script>
+
+    $(document).ready(function(){
+        var component_container = $(this).find('div#component')
+        $(component_container).hide()
+        var tabla_container = $(this).find('div#tabla table')
+        var input = $(this).find('input#tamagno_matriz')
+
+        $(input).change(function(){
+            var matriz_n = $(this).val()
+            // Limpiano la tabla por si tiene una matriz renderizada
+            $(tabla_container).empty()
+            for (i = 0; i < matriz_n; i++){
+                var fila = $('<tr></tr>');
+                for (j = 0; j < matriz_n; j++){
+                    var columna = $('<td></td>')
+                    var componente = $(component_container).find('input').clone()
+                    $(componente).attr('id', i + ',' + j)
+                    $(componente).appendTo(columna)
+                    $(fila).append(columna)
+                }
+
+                $(tabla_container).append(fila)
+            }
+        })
+    });
+
+</script>
+</body>
+</html>

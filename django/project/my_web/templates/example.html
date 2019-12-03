@@ -22,7 +22,7 @@
     </form>
     <div id="tabla">
         <div id="component">
-            <input type="number" min="0" id="-1">
+            <input type="number" min="0" id="-1" class="valores">
         </div>
         <table class="table">
             <tr>
@@ -42,14 +42,19 @@
             </tr>
         </table>
     </div>
+    <form>
+        <button type="button" class="btn btn-primary" id="form_submit">Enviar</button>
+    </form>
+    <div id="resultado">
+        <table class="table">
+        </table>
+    </div>
 </div>
 
 
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-        crossorigin="anonymous"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
         integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
         crossorigin="anonymous"></script>
@@ -63,7 +68,41 @@
         var component_container = $(this).find('div#component')
         $(component_container).hide()
         var tabla_container = $(this).find('div#tabla table')
+        var tabla_resultados_container = $(this).find('div#resultado table')
         var input = $(this).find('input#tamagno_matriz')
+        var form_submit = $(this).find('#form_submit')
+
+        var url = "{{result_url}}"
+
+        var request_callback = function(data){
+            console.log(data)
+        }
+
+        var make_request = function(data){
+            $.ajax({
+              type: "GET",
+              url: url,
+              data: {
+                "matrix": JSON.stringify(data)
+              },
+              success: request_callback,
+              dataType: "json"
+            });
+        }
+
+        $(form_submit).click(function(){
+            var data = {}
+            $(tabla_container).find('tr').each(function(index, row){
+                // Recorre todas las filas
+                $(this).find('td input').each(function(index, inp){
+                    // Recorre todas las columnas y accesa a los input
+                    var key = $(this).attr('id');
+                    var valor = $(this).val()
+                    data[key] = valor
+                })
+            })
+            make_request(data)
+        })
 
         $(input).change(function(){
             var matriz_n = $(this).val()

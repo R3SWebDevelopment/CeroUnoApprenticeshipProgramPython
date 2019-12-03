@@ -5,9 +5,13 @@ from .views import (
     persona_detail,
     member_listing,
     member_detail,
+    example_display,
+    example_view,
 )
 
 urlpatterns = [
+    path('example/', example_display, name='example_display'),
+    path('example/json/', example_view, name='example_view'),
     path('personas/', persona_listing, name='personas'),
     path('personas/<int:persona_id>/', persona_detail, name='persona'),
     path('miembros/', member_listing, name='miembros'),

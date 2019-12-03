@@ -1,8 +1,10 @@
 from django.shortcuts import get_object_or_404
+from django.http import JsonResponse
 from django.http import Http404
 from django.http import HttpResponse
 from django.template import loader
 from django.urls import reverse
+import json
 
 
 from .models import (
@@ -13,6 +15,40 @@ from .forms import (
     PersonaForm,
     MiembroForm,
 )
+
+
+def example_display(request):
+    context = {
+        "result_url": reverse('example_view')
+    }
+    template = loader.get_template('example.html')
+    return HttpResponse(template.render(context, request))
+
+
+def example_view(request):
+
+    # Aqui recibimos los valores de la matrix
+    matrix = request.GET.get('matrix', None)
+
+    if matrix is not None:
+        matrix = json.loads(matrix)
+
+    print("matrix: {}".format(matrix))
+
+
+    # Aqui mandamos una matrix de 5 x 1
+    data = {
+        "matrix_data": [
+            [7],
+            [2],
+            [4],
+            [10],
+            [3],
+        ],
+        "matrix_size": [5, 1]
+    }
+
+    return JsonResponse(data)
 
 
 def persona_listing(request):

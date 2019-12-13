@@ -1,4 +1,13 @@
 from django.http import JsonResponse
+from rest_framework import viewsets
+from rest_framework import filters
+
+from .serializers import (
+    PaisSerializer,
+    EstadoSerializer,
+    CiudadSerializer,
+)
+
 
 from .models import (
     Pais,
@@ -68,3 +77,24 @@ def city_listing(request):
         'more': False,
     }
     return JsonResponse(data)
+
+
+class PaisViewSet(viewsets.ModelViewSet):
+    queryset = Pais.objects.all()
+    serializer_class = PaisSerializer
+    filter_backends = [filters.SearchFilter]
+    filterset_fields = ['nombre', ]
+
+
+class EstadoViewSet(viewsets.ModelViewSet):
+    queryset = Estado.objects.all()
+    serializer_class = EstadoSerializer
+    filter_backends = [filters.SearchFilter]
+    filterset_fields = ['nombre', 'pais__nombre']
+
+
+class CiudadViewSet(viewsets.ModelViewSet):
+    queryset = Ciudad.objects.all()
+    serializer_class = CiudadSerializer
+    filter_backends = [filters.SearchFilter]
+    filterset_fields = ['nombre', 'estado__nombre', 'estado__pais__nombre']

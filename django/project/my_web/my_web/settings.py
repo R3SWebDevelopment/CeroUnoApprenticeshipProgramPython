@@ -31,6 +31,8 @@ ALLOWED_HOSTS = ['*']
 # Application definition
 
 INSTALLED_APPS = [
+    'rest_framework',
+    'rest_framework_swagger',
     'bootstrap4',
     'my_web.personas',
     'my_web.GeoInfo',
@@ -74,6 +76,10 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'my_web.wsgi.application'
 
+REST_FRAMEWORK = {
+    'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema',
+    'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend']
+}
 
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases

@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+                integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    
+        <title>Eliminación Gaussiana</title>
+    </head>
+<body style="background-color:rgba(26, 224, 208, 0.808);">
+   <div class="container">
+    <h2>Eliminación Gaussiana</h2>
+    <p>
+            En forma general este método propone la eliminación progresiva de variables en el sistema de ecuaciones, hasta tener sólo una ecuación con una incógnita. Una vez resuelta esta, se procede por sustitución regresiva hasta obtener los valores de todas las variables. 
+    </p>
+    <div class="row">
+            <div class="col-md-6">
+                    <div align="center"><img src="http://image.slidesharecdn.com/capitulo2ff-140428133813-phpapp02/95/clculo-matricial-y-sistemas-lineales-35-638.jpg?cb=1398692464"></div>
+            </div>
+            <br>
+            <form action="POST">
+                    <div class="row">
+                        <div class="col-md-3">
+                            Ingrese el punto inicial
+                            <input type="text" name="" id="" class="form-control">
+                        </div>
+                        <div class="col-md-3">
+                            Ingrese el error
+                            <input step="any" type="number" name="" id="" class="form-control">
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-md-6"></div>
+                        <div class="col-md-6 text-right">
+                            <button class="btn btn-danger">Limpiar</button>
+                            <button class="btn btn-primary">Enviar</button>
+                        </div>
+                    </div>
+                </form>
+                <form>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Tamaño de Matriz</label>
+                        <input type="number" class="form-control" id="tamagno_matriz" placeholder="Tamaño de Matriz" min="0">
+                    </div>
+                </form>
+                <div id="tabla">
+                    <div id="component">
+                        <input type="number" min="0" id="-1">
+                    </div>
+                    <table class="table">
+                        <tr>
+                            <th scope="col">
+                                <input type="number" min="0" id="-1">
+                            </th>
+                        </tr>
+                        <tr>
+                            <th scope="col">
+                                <input type="number" min="0" id="-1">
+                            </th>
+                        </tr>
+                        <tr>
+                            <th scope="col">
+                                <input type="number" min="0" id="-1">
+                            </th>
+                        </tr>
+                    </table>
+                </div>
+        </div><a href="/UNIDAD2/">Regresar</a>
+</div>    
+</body>
+</html>
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+
+<script>
+
+    $(document).ready(function(){
+        var component_container = $(this).find('div#component')
+        $(component_container).hide()
+        var tabla_container = $(this).find('div#tabla table')
+        var input = $(this).find('input#tamagno_matriz')
+
+        $(input).change(function(){
+            var matriz_n = $(this).val()
+            // Limpiano la tabla por si tiene una matriz renderizada
+            $(tabla_container).empty()
+            for (i = 0; i < matriz_n; i++){
+                var fila = $('<tr></tr>');
+                for (j = 0; j < matriz_n; j++){
+                    var columna = $('<td></td>')
+                    var componente = $(component_container).find('input').clone()
+                    $(componente).attr('id', i + ',' + j)
+                    $(componente).appendTo(columna)
+                    $(fila).append(columna)
+                }
+
+                $(tabla_container).append(fila)
+            }
+        })
+    });
+
+</script>
+</body>
+</html>

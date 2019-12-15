@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <title>Método de la falsa posición</title>
+</head>
+<body style="background-color:rgba(26, 224, 208, 0.808);">
+    <div class="container">
+    <h2>Método de la falsa posición</h2>
+    <p>
+        El método de la falsa posición pretende conjugar la seguridad del método de la bisección con la rapidez del método de la secante. Este método, como en el método de la bisección, parte de dos puntos que rodean a la raíz f(x) = 0, es decir, dos puntos x0 y x1tales que f(x0)f(x1) < 0. La siguiente aproximación, x2, se calcula como la intersección con el eje X de la recta que une ambos puntos (empleando la ecuación (35) del método de la secante). La asignación del nuevo intervalo de búsqueda se realiza como en el método de la bisección: entre ambos intervalos, [x0,x2] y [x2,x1], se toma aquel que cumpla f(x)f(x2) < 0.
+    </p>
+    <div align="center"><img src="http://blog.espol.edu.ec/matg1013/files/2017/10/posicionfalsa01.png"></div>
+    <form action="POST">
+        <div class="row">
+            <div class="col-md-3">
+                Ingrese la funcion
+                <input type="text" name="" id="" class="form-control">
+            </div>
+            <div class="col-md-3">
+                Ingrese el punto inicial
+                <input step="any" type="number" name="" id="" class="form-control">
+            </div>
+            <div class="col-md-3">
+                Ingrese el punto final
+                <input step="any" type="number" name="" id="" class="form-control">
+            </div>
+            <div class="col-md-3">
+                Ingrese el error
+                <input step="any" type="number" name="" id="" class="form-control">
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-md-6"></div>
+            <div class="col-md-6 text-right">
+                <button class="btn btn-danger">Limpiar</button>
+                <button class="btn btn-primary">Enviar</button>
+            </div>
+        </div>
+    </form>
+
+    <a href="/UNIDAD1/">Regresar</a>
+</body style="background-color:rgba(26, 224, 208, 0.808);">
+</html>

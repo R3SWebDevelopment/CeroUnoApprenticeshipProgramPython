@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <title>Simpson 1/3.</title>
+</head>
+<body>
+        <div class="container">
+    <h2>
+        Simpson 1/3
+    </h2>
+    <p>
+            La Regla de Simpson de 1/3 proporciona una aproximación más precisa, ya que consiste en conectar grupos sucesivos de tres puntos sobre la curva mediante parábolas de segundo grado, y sumar las áreas bajo las parábolas para obtener el área aproximada bajo la curva.
+
+            Suponemos que tenemos los datos:
+            
+            donde es el punto medio entre y .
+            
+            En este caso se tiene que:
+            
+            donde es el polinomio de interpolación para los datos en la tabla anterior. Usaremos el polinomio de Lagrange.
+            
+            Así, tenemos que:
+            
+            Si denotamos, entonces:
+            
+            Simplificando términos:
+            
+            Vemos que cada uno de los términos anteriores, es esencialmente de la misma forma, es decir, una constante por
+            
+            Así, calculamos la siguiente integral por partes:
+            
+            Sea:
+            
+            por lo tanto,
+            
+            Usamos esta fórmula para calcular la integral de cada uno de los tres términos de .
+            
+            Debido al factor se le conoce como la regla de Simpson de un tercio. 
+    </p>
+    <div align="center"><img src="http://blog.espol.edu.ec/matg1013/files/2018/08/reglasimpson03.png"></div>
+    
+    <a href="/UNIDAD5/">Regresar</a>
+    </div>
+</body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <title>Cholesky</title>
+</head>
+<body>
+    <div class="container">
+    <h2>
+        Cholesky
+    </h2>
+    <p>
+            En matemáticas, la factorización o descomposición de Cholesky toma su nombre del matemático André-Louis Cholesky, quien encontró que una matriz simétrica definida positiva puede ser descompuesta como el producto de una matriz triangular inferior y la traspuesta de la matriz triangular inferior. La matriz triangular inferior es el triángulo de Cholesky de la matriz original positiva definida. El resultado de Cholesky ha sido extendido a matrices con entradas complejas. Es una manera de resolver sistemas de ecuaciones matriciales y se deriva de la factorización LU con una pequeña variación.
+
+            Cualquier matriz cuadrada A con pivotes no nulos puede ser escrita como el producto de una matriz triangular inferior L y una matriz triangular superior U; esto recibe el nombre de factorización LU. Sin embargo, si A es simétrica y definida positiva, se pueden escoger los factores tales que U es la transpuesta de L, y esto se llama la descomposición o factorización de Cholesky. Tanto la descomposición LU como la descomposición de Cholesky son usadas para resolver sistemas de ecuaciones lineales. Cuando es aplicable, la descomposición de Cholesky es dos veces más eficiente que la descomposición LU. 
+    </p>
+    <div align="center"><img src="https://sites.google.com/site/procesosnumericoslrl20151/_/rsrc/1432249707828/segunda-entrega/metodos-directos/factorizacion-cholesky/Captura1.PNG"></div>
+    <form action="POST">
+            <div class="row">
+                <div class="col-md-3">
+                    Ingrese la dimensión de la matriz
+                    <input type="text" name="" id="" class="form-control">
+                </div>
+                <div class="col-md-3">
+                    Ingrese el punto inicial
+                    <input step="any" type="number" name="" id="" class="form-control">
+                </div>
+                <div class="col-md-3">
+                    Ingrese el error
+                    <input step="any" type="number" name="" id="" class="form-control">
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-md-6"></div>
+                <div class="col-md-6 text-right">
+                    <button class="btn btn-danger">Limpiar</button>
+                    <button class="btn btn-primary">Enviar</button>
+                </div>
+            </div>
+        </form>
+    <a href="/pag9/">Regresar</a>
+    
+</div>
+</body>
+</html>

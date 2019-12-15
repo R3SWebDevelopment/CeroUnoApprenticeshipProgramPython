@@ -1,0 +1,18 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+<h1>Consulta Libros</h1>
+
+  <p>Bienvenidos a <em>Consulta tus Libros Préstados</em>.</p>
+
+
+  <p>Hasta ahora contamos con lo siguiente:</p>
+  <ul>
+    <li><strong>Libros:</strong> {{ num_books }}</li>
+    <li><strong>Copias:</strong> {{ num_instances }}</li>
+    <li><strong>Copias Disponibles para Préstamos:</strong> {{ num_instances_available }}</li>
+    <li><strong>Autores Registrados:</strong> {{ num_authors }}</li>
+  </ul>
+  <p>Se ha visitado esta página un total de: {{ num_visits }}{% if num_visits == 1 %} ocasión {% else %} veces {% endif %}.</p>
+
+{% endblock %}

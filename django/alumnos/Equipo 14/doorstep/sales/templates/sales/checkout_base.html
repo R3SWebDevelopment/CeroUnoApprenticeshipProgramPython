@@ -1,0 +1,38 @@
+{% extends catalog_template_name %}
+
+{% block catalog-content %}
+<ul class="nav justify-content-center nav-checkout-steps">
+  <li class="nav-item">
+    <a class="nav-link text-center {% if step_active == 'cart' %}active{% elif 'cart' in steps_processed %}text-muted{% else %}text-lightgrey{% endif %}" {% if 'cart' in  steps_processed %}href="{% url 'sales_checkout_cart' %}"{% endif %}>
+      <i class="fa fa-shopping-cart"></i><br><span>Cart</span>
+    </a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link text-center {% if step_active == 'billing' %}active{% elif 'billing' in steps_processed %}text-muted{% else %}text-lightgrey{% endif %}" {% if 'billing' in  steps_processed %}href="{% url 'sales_checkout_billing' %}"{% endif %}>
+      <i class="fa fa-home"></i><br><span>Billing</span>
+    </a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link text-center {% if step_active == 'shipping' %}active{% elif 'shipping' in steps_processed %}text-muted{% else %}text-lightgrey{% endif %}" {% if 'shipping' in  steps_processed %}href="{% url 'sales_checkout_shipping' %}"{% endif %}>
+      <i class="fa fa-truck"></i><br><span>Shipping</span>
+    </a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link text-center {% if step_active == 'payment' %}active{% elif 'payment' in steps_processed %}text-muted{% else %}text-lightgrey{% endif %}" {% if 'payment' in  steps_processed %}href="{% url 'sales_checkout_payment' %}"{% endif %}>
+      <i class="fa fa-credit-card"></i><br><span>Payment</span>
+    </a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link text-center {% if step_active == 'order' %}active{% elif 'order' in steps_processed %}text-muted{% else %}text-lightgrey{% endif %}" {% if 'order' in  steps_processed %}href="{% url 'sales_checkout_order' %}"{% endif %}>
+      <i class="fa fa-list"></i><br><span>Order</span>
+    </a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link text-center {% if step_active == 'receipt' %}active{% else %}text-lightgrey{% endif %}">
+      <i class="fa fa-print"></i><br><span>Receipt</span>
+    </a>
+  </li>
+</ul>
+
+{% block checkout-content %}{% endblock %}
+{% endblock %}

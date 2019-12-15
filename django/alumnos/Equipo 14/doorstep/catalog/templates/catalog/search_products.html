@@ -1,0 +1,33 @@
+{% extends catalog_template_name %}
+
+{% load pipeline %}
+
+{% block catalog-content %}
+<div class="row">
+	<h5 class="col-12 col-md-4">Search results for {% firstof form.keyword.value category.name 'All products' %}</h5>
+	<form class="col-12 col-md-8" method="get" action="{% url 'catalog_search' %}">
+		{{ form.keyword.as_hidden }}
+		{{ form.category.as_hidden }}
+		<div class="form-row">
+			<div class="col-12 col-sm-4 offset-sm-3">
+				<input type="number" name="{{ form.price_from.name }}" value="{{ form.price_from.data }}" class="form-control" placeholder="Price from.."/>
+			</div>
+			<div class="col-12 col-sm-4">
+				<input type="number" name="{{ form.price_to.name }}" value="{{ form.price_to.data }}" class="form-control" placeholder="Price to.."/>
+			</div>
+			<div class="col-12 col-sm-1">
+				<button type="submit" class="btn btn-primary" title="Filter search results."><i class="fas fa-filter"></i></button>
+			</div>
+		</div>
+	</form>
+</div>
+<div class="mt-5">
+{% with no_products_message="No products found for your search criteria" %}
+{% include "catalog/parts/product_list.html" %}
+{% endwith %}
+</div>
+{% endblock %}
+{% block scripts %}
+{{ block.super }}
+{% javascript 'search_products' %}
+{% endblock %}

@@ -1,0 +1,46 @@
+{% extends checkout_template_name %}
+
+{% block checkout-content %}
+<div class="row">
+	<div class="col-md-6 offset-md-3">
+		<form method="post" action="{% url 'sales_checkout_payment' %}" class="jumbotron py-2 mt-4">
+			<h4 class="my-3">Payment method</h4>
+			{% csrf_token %}
+			{% if error %}
+			<div class="text-danger mb-3">
+				{{ error }}
+			</div>
+			{% endif %}
+			{% for method in payment_methods %}
+			<div class="py-2">
+				<div class="custom-control custom-radio">
+					<input class="custom-control-input" id="id_payment_method_{{ method.code }}" name="payment_method" type="radio" value="{{ method.code }}" {% if payment_method == method.code %}checked="checked"{% endif %}/>
+					<label class="custom-control-label" for="id_payment_method_{{ method.code }}">{{ method.name }}</label>
+				</div>
+			</div>
+			{% endfor %}
+			<div id="id_po_number_control" class="form-group d-none ml-4 mt-2">
+				<input  class="form-control" type="text" id="id_po_number" name="po_number" value="{{ po_number|default:'' }}" placeholder="Purchase order number..."/>
+			</div>
+			<div class="form-group mt-2 text-right">
+				<button class="btn btn-secondary">Next</button>
+			</div>
+		</form>
+	</div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+{{ block.super }}
+<script type="text/javascript">
+	$('input[name="payment_method"]').change(function(){
+		if($(this).val() == 'PO')
+			$('#id_po_number_control').removeClass('d-none');
+		else
+			$('#id_po_number_control').addClass('d-none');
+	});
+
+	if($('input[name="payment_method"][value="PO"]').is(':checked'))
+		$('#id_po_number_control').removeClass('d-none');
+</script>
+{% endblock %}

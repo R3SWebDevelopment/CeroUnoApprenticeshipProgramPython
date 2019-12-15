@@ -1,0 +1,82 @@
+{% extends base_template_name %}
+
+{% load cart %}
+{% load pipeline %}
+{% load cache %}
+
+{% block header-menu %}
+<div class="container-fluid d-none d-sm-block">
+	{% include "catalog/parts/search_box.html" %}
+</div>
+<div class="ml-auto d-flex">
+	<div class="dropdown">
+		<button id="currency-dropdown-button" class="btn btn-outline-dark border" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="Currency">
+			{{ default_currency.code }}
+			<i class="fas fa-angle-down right ml-1"></i>
+		</button>
+		<div class="dropdown-menu" aria-labelledby="currency-dropdown-button">
+			<form method="post" action="{% url 'catalog_change_currency' %}">
+				{% csrf_token %}
+				<input type="hidden" name="next" value="{{ request.get_full_path }}" />
+				<input id="default_currency" type="hidden" name="default_currency"/>
+				<ul class="list-unstyled">
+					{% for currency in currencies %}
+					<li>
+						<a href="#" class="dropdown-item" onclick="javascript:$('#default_currency').val('{{ currency.code }}').closest('form').submit();">{{ currency.code }}</a>
+					</li>
+					{% endfor %}
+				</ul>
+			</form>
+		</div>
+	</div>
+	<div id="basket-container">
+		{% cart_basket %}
+	</div>
+</div>
+{{ block.super }}
+<div class="container-fluid d-sm-none mt-2">
+	{% include "catalog/parts/search_box.html" %}
+</div>
+{% endblock %}
+
+{% block side-nav-content %}
+{{ block.super }}
+<li class="bg-light text-info mt-4">
+	<a class="text-uppercase"><small>Categories</small></a>
+</li>
+{% with template_name="catalog/parts/category_list.html" %}
+{% for category in categories %}
+{% include template_name %}
+{% empty %}
+<li>
+	<p class="text-white">There are no categories defined.</p>
+</li>
+{% endfor %}
+{% endwith %}
+<li class="bg-light text-info mt-4">
+	<a class="text-uppercase"><small>Productkis</small></a>
+</li>
+{% for manufacturer in manufacturers %}
+<li>
+	<a href="{{ manufacturer.get_absolute_url }}">{{ manufacturer.name }}</a>
+</li>
+{% empty %}
+<li>
+	<p class="text-white">There are no brands defined.</p>
+</li>
+{% endfor %}
+{% endblock %}
+
+{% block content %}
+<div>
+	<div id="catalog-content" class="container mt-5">
+		{% block catalog-content %}
+		{% endblock %}
+	</div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+{{ block.super }}
+{% javascript 'catalog_base' %}
+{% endblock %}

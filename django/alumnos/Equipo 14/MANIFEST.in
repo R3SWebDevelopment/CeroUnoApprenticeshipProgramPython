@@ -1,0 +1,22 @@
+include MANIFEST.in
+recursive-include doorstep/bin *
+recursive-include doorstep/fixtures *
+recursive-include doorstep/geo/fixtures *
+recursive-include doorstep/sales/fixtures *
+recursive-include doorstep/pages/fixtures *
+recursive-include doorstep/payments/fixtures *
+recursive-include doorstep/financial/fixtures *
+recursive-include doorstep/static *
+recursive-include doorstep/templates *
+recursive-include doorstep/sales/static *
+recursive-include doorstep/sales/templates *
+recursive-include doorstep/catalog/static *
+recursive-include doorstep/catalog/templates *
+recursive-include doorstep/accounts/templates *
+recursive-include doorstep/payments/templates *
+recursive-include doorstep/conf/project_template *
+recursive-include doorstep/pages/static *
+recursive-include doorstep/pages/templates *
+recursive-exclude * .DS_Store
+recursive-exclude * *.py[co]
+recursive-exclude * __pycache__

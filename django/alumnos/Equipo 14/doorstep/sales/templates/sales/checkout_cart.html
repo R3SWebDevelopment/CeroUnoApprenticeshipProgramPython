@@ -1,0 +1,92 @@
+{% extends checkout_template_name %}
+
+{% load thumbnail %}
+{% load catalog_filters %}
+
+{% block checkout-content %}
+<div class="cart mt-3">
+  <h4 class="d-flex justify-content-between align-items-center mb-3">
+    <span class="text-muted">Your shoppping cart</span>
+    {% if cart.get_items_count %}
+    <span class="badge badge-secondary badge-pill font-weight-normal" title="Total product items in your cart">{{ cart.get_items_count }}</span>
+    {% endif %}
+  </h4>
+  {% if error %}
+  <div class="text-danger pt-2 pb-3">
+      {{ error }}
+  </div>
+  {% elif message %}
+  <div class="text-success pt-2 pb-3">
+      {{ message }}
+  </div>
+  {% endif %}
+  {% if cart.get_items_count %}
+  <ul class="list-group mb-3">
+    {% for item in cart.get_items %}
+    {% with product=item.product %}
+    <li class="list-group-item d-flex lh-condensed">
+      <div class="img-container rounded-circle overflow-hidden mr-3">
+        {% thumbnail product.pics.all.0.url "54x54" as im %}
+        <img class="border" src="{{ im.url }}" alt="{{ product.name }}" title="{{ product.name }}" />
+        {% endthumbnail %}
+        <div class="img-overlay d-block"></div>
+      </div>
+      <div>
+        <h6 class="my-0"><a class="text-dark" href="{{ product.get_absolute_url }}">{{ product.name }}</a></h6>
+        <small class="text-muted">{{ product.gist|truncatechars:50 }}</small>
+      </div>
+      <span class="ml-auto d-flex flex-column justify-content-between align-items-end show">
+        <span class="text-muted">{{ product.price|currency:default_currency }}</span>
+        <div class="d-flex align-items-center">
+          <form class="mr-4" method="post" action="{% url 'sales_checkout_cart' %}">
+            {% csrf_token %}
+            <input type="hidden" name="product_id" value="{{ product.id }}">
+            <input name="quantity" type="text" class="form-control w-75" size="1"  value="{{ item.quantity }}" onchange="javascript:$(this).closest('form').submit();"/>
+          </form>
+          <form method="post" action="{% url 'sales_remove_from_cart' %}">
+            {% csrf_token %}
+            <input name="product_id" type="hidden" value="{{ item.product_id }}"/>
+            <a class="text-lightgrey" href="#" onclick="javascript:$(this).closest('form').submit();" title="Remove this item from the cart"><i class="fa fa-trash"></i></a>
+          </form>
+        </div>
+      </span>
+    </li>
+    {% endwith %}
+    {% endfor %}
+    <li class="list-group-item d-flex justify-content-between bg-light">
+      <span>Subtotal</span>
+      <span class="text-success">{{ cart.get_sub_total|currency:default_currency }}</span>
+    </li>
+    <li class="list-group-item d-flex justify-content-between bg-light">
+      <span>Shipping cost</span>
+      <span>{{ cart.get_shipping_cost|currency:default_currency }}</span>
+    </li>
+    <li class="list-group-item d-flex justify-content-between bg-light">
+      <span>Tax</span>
+      <span>{{ cart.get_taxes|currency:default_currency }}</span>
+    </li>
+    <li class="list-group-item d-flex justify-content-between bg-light">
+      <span>Total ({{ default_currency.code }})</span>
+      <strong class="text-danger">{{ cart.get_total|currency:default_currency }}</strong>
+    </li>
+  </ul>
+  <div class="d-flex flex-row flex-wrap align-items-center justify-content-end">
+    <form method="post" action="{% url 'sales_remove_all_from_cart' %}" class="mr-auto mt-2">
+      {% csrf_token %}
+      <a href="#" onclick="javascript:$(this).closest('form').submit(); return false;" title="Remove all items from the cart">Remove all
+      </a>
+    </form>
+    <a class="btn btn-primary ml-2 mt-2" href="{% url 'catalog_index' %}" data-toggle="tooltip" title="Go back to browse catalog">
+      <i class="fas fa-cart-plus mr-2"></i>Continue Shopping
+    </a>
+    <a class="btn btn-warning ml-2 mt-2" href="{% url 'sales_checkout_billing' %}" data-toggle="tooltip" title="Proceed to place order">
+      <i class="fa fa-shopping-cart mr-2"></i>Checkout
+    </a>
+  </div>
+  {% else %}
+  <div class="text-info">
+    You have no items in your shopping cart.
+  </div>
+  {% endif %}
+</div>
+{% endblock %}

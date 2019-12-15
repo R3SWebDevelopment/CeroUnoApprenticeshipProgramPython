@@ -1,0 +1,16 @@
+{% extends catalog_template_name %}
+
+{% block catalog-content %}
+<div>
+    <h3>Payment transaction</h3>
+    {% if error %}
+    <div class="text-danger mt-5">
+      {{ error }}
+    </div>
+    {% else %}
+    <div class="text-info mt-5">
+      {{ message }}
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

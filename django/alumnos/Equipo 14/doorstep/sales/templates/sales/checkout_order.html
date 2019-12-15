@@ -1,0 +1,104 @@
+{% extends checkout_template_name %}
+
+{% load thumbnail %}
+{% load catalog_filters %}
+{% load pipeline %}
+
+{% block checkout-content %}
+<div class="row mt-5">
+	<div class="col-md-8">
+		<div class="d-flex justify-content-between align-items-center">
+			<h3>Your cart</h3>
+			<span class="badge badge-secondary badge-pill bg-lightgrey"><h6 class="my-auto">{{ cart.get_items_count }}</h6></span>
+		</div>
+		{% if error %}
+		<div class="text-danger">
+			{{ error }}
+		</div>
+		{% endif %}
+		<div class="cart">
+			<ul class="list-group mb-3">
+		    {% for item in cart.get_items %}
+		    {% with product=item.product %}
+		    <li class="list-group-item d-flex lh-condensed">
+		      <div class="img-container rounded-circle overflow-hidden mr-3">
+		        {% thumbnail product.pics.all.0.url "54x54" as im %}
+		        <img class="border" src="{{ im.url }}" alt="{{ product.name }}" title="{{ product.name }}" />
+		        {% endthumbnail %}
+		        <div class="img-overlay d-block"></div>
+		      </div>
+		      <div>
+		        <h6 class="my-0"><a class="text-dark" href="{{ product.get_absolute_url }}">{{ product.name }}</a></h6>
+		        <small class="text-muted">{{ product.gist|truncatechars:50 }}</small>
+		      </div>
+					<span class="ml-auto d-flex flex-column justify-content-between align-items-end">
+						<span class="text-muted small">{{ product.price|currency:default_currency }}</span>
+						<div class="d-flex justify-content-between align-items-center mt-auto">
+							<span class="badge badge-secondary bg-lightgrey badge-pill mr-2">{{ item.quantity }}</span>
+							<span class="text-success">{{ item.get_sub_total|currency:default_currency }}</span>
+						</div>
+					</span>
+		    </li>
+		    {% endwith %}
+		    {% endfor %}
+		    <li class="list-group-item d-flex justify-content-between bg-light">
+		      <span>Subtotal</span>
+		      <span class="text-success">{{ cart.get_sub_total|currency:default_currency }}</span>
+		    </li>
+		    <li class="list-group-item d-flex justify-content-between bg-light">
+		      <span>Shipping cost</span>
+		      <span>{{ cart.get_shipping_cost|currency:default_currency }}</span>
+		    </li>
+		    <li class="list-group-item d-flex justify-content-between bg-light">
+		      <span>Tax</span>
+		      <span>{{ cart.get_taxes|currency:default_currency }}</span>
+		    </li>
+		    <li class="list-group-item d-flex justify-content-between bg-light">
+		      <span>Total ({{ default_currency.code }})</span>
+		      <strong class="text-danger">{{ cart.get_total|currency:default_currency }}</strong>
+		    </li>
+		  </ul>
+		</div>
+		<form method="post" {% if payment_method == 'Credit Card' %}data-ajax="true"{% endif %} action="{% url 'sales_checkout_order' %}" data-ajax-update="#payment-options-container" data-ajax-success="showPaymentOptions();">
+			{% csrf_token %}
+			<a title="Placed order" class="btn btn-danger float-right mt-3 text-white" onclick="javascript:$(this).closest('form').submit();">
+				<i class="fas fa-check-square mr-2"></i>Place Order
+			</a>
+		</form>
+	</div>
+	<div class="col-md-4">
+		<div class="card  mb-3">
+			<h6 class="card-header text-muted">
+				<i class="fas fa-credit-card mr-2"></i>
+				Payment method
+			</h6>
+			<div class="card-body">
+				<span>{{ payment_method }}</span>
+				{% if po_number %}<b>#{{ po_number }}</b>{% endif %}
+			</div>
+		</div>
+		{% with address=billing_address address_name="Billing address" address_icon="fa-home" %}
+		{% include "sales/parts/address.html" %}
+		{% endwith %}
+		{% with address=shipping_address address_name="Shipping address" address_icon="fa-truck" %}
+		{% include "sales/parts/address.html" %}
+		{% endwith %}
+	</div>
+</div>
+<div id="payment-options-container" class="modal fade" tabindex="-1" role="dialog">
+
+</div>
+{% endblock %}
+
+{% block scripts %}
+{{ block.super }}
+{% javascript 'sales_checkout_order' %}
+<script type="text/javascript">
+	function showPaymentOptions() {
+		$('#payment-options-container').modal({
+			backdrop: 'static',
+			keyboard: false
+		});
+	}
+</script>
+{% endblock %}

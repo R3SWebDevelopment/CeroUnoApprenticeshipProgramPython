@@ -1,0 +1,14 @@
+{% if category.sub_categories_count %}
+<li>
+		<a href="#category-{{ category.id }}-sub-list" class="dropdown-toggle" data-toggle="collapse" aria-expanded="false">{{ category.name }}</a>
+		<ul class="collapse list-unstyled" id="category-{{ category.id }}-sub-list">
+			{% for category in category.sub_categories_list %}
+			{% include template_name %}
+			{% endfor %}
+		</ul>
+</li>
+{% else %}
+<li>
+	<a href="{{ category.get_absolute_url }}">{{ category.name }}</a>
+</li>
+{% endif %}

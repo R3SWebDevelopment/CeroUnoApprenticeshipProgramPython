@@ -1,0 +1,99 @@
+{% load static %}
+<html>
+    <head>
+        <link rel="stylesheet" href=""{% static "main.css" %}"">
+        <link rel="stylesheet" href="{% static "css/bootstrap.min.css" %}">
+        <link rel="stylesheet" href="{% static "css/datatables.min.css" %}">
+
+    </head>
+    <body>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-8">
+                    <h1>Lista de Mujeres</h1>
+                </div>
+                <div class="col-4">
+                    <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#exampleModal">
+                      Agregar Mujer
+                    </button>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <table id="main_table" class="display">
+                        <thead>
+                            <tr>
+                                <th>Nombre</th>
+                                <th>Apellido Paterno</th>
+                                <th>Apellido Materno</th>
+                                <th>Dirección</th>
+                                <th>Tel.</th>
+                                <th>Foto Perfil</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        {% for mujer in lista_mujeres %}
+                             <tr>
+                                 <td>{{mujer.nombre}}</td>
+                                 <td>{{mujer.apellido_paterno}}</td>
+                                 <td>{{mujer.apellido_materno}}</td>
+                                 <td>{{mujer.direccion}}</td>
+                                 <td>{{mujer.telefono}}</td>
+                                 <td><img src="https://source.unsplash.com/800x800/?woman,portrait" class="img-fluid" alt=""></td>
+                            </tr>
+                        {% endfor %}
+
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+
+
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Modal Para Agregar una Mujer</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12">
+                            {% block content %}
+                            <form method="post">
+                                {% csrf_token %}
+                                {{ form.as_p}}
+                                <button type="submit" name="button" class="btn btn-success">Guardar</button>
+                            </form>
+                            {% endblock %}
+                        </div>
+                    </div>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <!--<button type="button" class="btn btn-primary">Save changes</button> -->
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+    <!-- load scripts -->
+    <script src="{% static "js/jquery-3.4.1.min.js" %}"></script>
+    <script src="{% static "js/bootstrap.min.js" %}"></script>
+    <script src="{% static "js/datatables.min.js" %}"></script>
+    <script>
+        $(document).ready( function () {
+            $('#main_table').DataTable();
+        } );
+    </script>
+  </body>
+</html>

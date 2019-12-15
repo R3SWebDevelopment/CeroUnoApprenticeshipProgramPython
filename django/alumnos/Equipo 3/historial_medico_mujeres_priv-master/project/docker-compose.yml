@@ -1,0 +1,33 @@
+version: '3'
+
+services:
+  db:
+    image: postgres:latest
+    environment:
+      DB_USER: my_web_db_user
+      DB_PASS: Passw0rd
+      B_NAME: my_web_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./postgres-data:/var/lib/postgresql/data
+    command: postgres -c listen_addresses='*'
+  web:
+    build: .
+    command: python my_web/manage.py runserver 0.0.0.0:8000
+    volumes:
+      - .:/code
+    ports:
+      - "8000:8000"
+    depends_on:
+      - migration
+  migration:
+    build: .
+    image: app
+    command: bash -c "python my_web/manage.py makemigrations --noinput && python my_web/manage.py migrate --noinput"
+    volumes:
+      - .:/code
+    links:
+      - db
+    depends_on:
+      - db

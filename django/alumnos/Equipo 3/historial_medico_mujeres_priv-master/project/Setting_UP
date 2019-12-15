@@ -1,0 +1,40 @@
+**Checking Docker is Running**
+
+`> docker --version`
+
+`Docker version 19.03.4, build 9013bf5`
+
+**Checking if containers are nor already build**
+
+`> docker ps -a¡`
+
+`CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS                     PORTS               NAMES`
+
+**Checking docker Images**
+
+`>docker images`
+
+`REPOSITORY                                       TAG                 IMAGE ID            CREATED             SIZE 
+app                                              latest              06229444c187        3 days ago          1.12GB
+project_web                                      latest              409c6e8a25a8        3 days ago          1.12GB
+`
+
+**Delete Docker Images**
+
+`>docker rmi 06229444c187`
+
+**Setting Up Containers for Django Project**
+
+1. Build DB container: `>docker-compose build db`
+1. Bring DB container up: `>docker-compose up db`
+    1. Set DB container to run on background:  `>docker-compose up -d db`
+1. Build MIGRATIONS container: `>docker-compose build migration`
+1. Build WEB container: `>docker-compose build web`
+1. Create a Django Project: `>docker-compose run web django-admin startproject my_web`
+1. Setup DB connection on settings.py file
+1. Run MIGRATIONS container to create db `>docker-compose up migration`
+1. Run Web container to check if settings and db are working: `>docker-compose up web`
+1. Create a Super User for Admin: `>docker-compose run web python my_web/manage.py createsuperuser`
+
+**Helpfull Commands**
+1. Create migrations for a specific app: `>docker-compose run migration python my_web/manage.py makemigrations <APP_NAME>`
